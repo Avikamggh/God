@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Zodiax</title>
+    <style>
+        :root {
+            --bg-gradient-start: #001324;
+            --bg-gradient-end: #002344;
+            --text-color: #fff;
+            --text-secondary: #8a8f98;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(1, 17, 34, 0.7);
+        }
+
+        [data-theme="light"] {
+            --bg-gradient-start: #f0f2f5;
+            --bg-gradient-end: #ffffff;
+            --text-color: #1a1a1a;
+            --text-secondary: #666666;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            transition: background 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #0066cc, #00b4db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00b4db;
+        }
+
+        .stats {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            margin-bottom: 4rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #0066cc, #00b4db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-item p {
+            color: var(--text-secondary);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(45deg, #2a5298, #1e3c72);
+        }
+
+        .member-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stats {
+                padding: 2rem 1rem;
+            }
+
+            .stat-item h4 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero">
+            <h1>About Zodiax</h1>
+            <p>Pioneering the future of autonomous AI agents through blockchain technology and decentralized intelligence.</p>
+        </section>
+
+        <section class="section">
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Our Vision</h3>
+                    <p>Building a decentralized ecosystem where AI agents can autonomously interact, learn, and evolve while maintaining security and transparency through blockchain technology.</p>
+                </div>
+                <div class="card">
+                    <h3>Innovation</h3>
+                    <p>Leveraging cutting-edge AI and blockchain technology to develop self-learning agents that can adapt and respond to market conditions in real-time.</p>
+                </div>
+                <div class="card">
+                    <h3>Security</h3>
+                    <p>Built on robust security protocols with multiple layers of protection to ensure safe and reliable operation of autonomous agents.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>100K+</h4>
+                    <p>Active Agents</p>
+                </div>
+                <div class="stat-item">
+                    <h4>$50M+</h4>
+                    <p>Total Value Locked</p>
+                </div>
+                <div class="stat-item">
+                    <h4>200K+</h4>
+                    <p>Community Members</p>
+                </div>
+                <div class="stat-item">
+                    <h4>99.9%</h4>
+                    <p>Uptime</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar"></div>
+                    <h3 class="member-name">Alex Chen</h3>
+                    <p class="member-role">Founder & CEO</p>
+                    <p>AI researcher with 10+ years of experience in machine learning and blockchain technology.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar"></div>
+                    <h3 class="member-name">Sarah Kumar</h3>
+                    <p class="member-role">Chief Technology Officer</p>
+                    <p>Former lead developer at major blockchain projects with expertise in smart contracts.</p>
+                </div>
+                <div class="team-member">
+                    <div class="member-avatar"></div>
+                    <h3 class="member-name">Michael Park</h3>
+                    <p class="member-role">Head of Research</p>
+                    <p>PhD in Artificial Intelligence with focus on autonomous systems and deep learning.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Initialize theme from localStorage on page load
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        }
+
+        // Run initialization when page loads
+        document.addEventListener('DOMContentLoaded', initializeTheme);
+
+        // Listen for theme changes in localStorage
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'theme') {
+                if (e.newValue === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

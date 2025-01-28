@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zodiax Protocol</title>
+    <style>
+        :root {
+            --bg-gradient-start: #001324;
+            --bg-gradient-end: #002344;
+            --navbar-bg: rgba(1, 17, 34, 0.95);
+            --text-color: #fff;
+            --text-secondary: #8a8f98;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --search-bg: rgba(255, 255, 255, 0.05);
+            --table-bg: rgba(1, 17, 34, 0.7);
+            --btn-secondary-bg: rgba(255, 255, 255, 0.1);
+            --token-icon-gradient-start: #2a5298;
+            --token-icon-gradient-end: #1e3c72;
+            --negative-color: #ff4757;
+        }
+
+        [data-theme="light"] {
+            --bg-gradient-start: #f0f2f5;
+            --bg-gradient-end: #ffffff;
+            --navbar-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #1a1a1a;
+            --text-secondary: #666666;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --search-bg: rgba(0, 0, 0, 0.05);
+            --table-bg: rgba(255, 255, 255, 0.7);
+            --btn-secondary-bg: rgba(0, 0, 0, 0.05);
+            --token-icon-gradient-start: #4b6cb7;
+            --token-icon-gradient-end: #182848;
+            --negative-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+
+        .navbar {
+            padding: 1rem 2rem;
+            background: var(--navbar-bg);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 102, 204, 0.4);
+            background: linear-gradient(45deg, #0066cc, #003366);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-color);
+            background: var(--btn-secondary-bg);
+        }
+
+        .center-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            margin: 0 2rem;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--search-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            width: 300px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus-within {
+            border-color: #0cf;
+            box-shadow: 0 0 15px rgba(0, 204, 255, 0.3);
+        }
+
+        .search-bar input {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            width: 100%;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .right-section {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: #00b4db;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 180, 219, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #0083b0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--btn-secondary-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--search-bg);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--btn-secondary-bg);
+        }
+
+        .main-content {
+            padding: 1rem;
+        }
+
+        .data-table {
+            width: 100%;
+            background: var(--table-bg);
+            border-radius: 16px;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+            transition: all 0.3s ease;
+        }
+
+        .data-row {
+            display: grid;
+            grid-template-columns: 40px 2fr 1fr 1fr 1fr 1fr 1fr;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            min-width: 800px;
+        }
+
+        .data-header {
+            font-weight: bold;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .token-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(45deg, var(--token-icon-gradient-start), var(--token-icon-gradient-end));
+            border-radius: 50%;
+        }
+
+        .negative {
+            color: var(--negative-color);
+        }
+
+        .token-name {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .token-details {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-family: monospace;
+        }
+
+        @media (max-width: 1200px) {
+            .center-section {
+                margin: 0 1rem;
+            }
+            .search-bar {
+                width: 250px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .navbar {
+                padding: 1rem;
+            }
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            .left-section {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 0.75rem 1rem;
+                width: 100%;
+            }
+
+            .center-section {
+                order: 2;
+                width: 100%;
+                margin: 1rem 0;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+
+            .right-section {
+                order: 3;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .btn {
+                flex: 1;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.75rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .right-section {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .data-row {
+                font-size: 0.9rem;
+            }
+
+            .token-details {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="left-section">
+            <div class="logo">Zodiax</div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <div class="nav-links">
+                <a href="#">Sentient</a>
+                <a href="#">Prototype</a>
+                <a href="About.html">About</a>
+                <a href="#">Try LYRS</a>
+            </div>
+        </div>
+        
+        <div class="center-section">
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+        </div>
+
+        <div class="right-section">
+            <button class="btn btn-primary" onclick="openAgentModal()">Create New Agent</button>
+            <button class="btn btn-secondary">Connect Wallet</button>
+            <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="data-table">
+            <div class="data-row data-header">
+                <div></div>
+                <div>Agent</div>
+                <div>Market Cap</div>
+                <div>24h Change</div>
+                <div>TVL</div>
+                <div>Holders</div>
+                <div>24h Volume</div>
+            </div>
+            <div class="data-row">
+                <div class="token-icon"></div>
+                <div>
+                    <div class="token-name">STAR</div>
+                    <div class="token-details">0x1234...5678</div>
+                </div>
+                <div>$45.62M</div>
+                <div class="negative">-12.18%</div>
+                <div>$8.22M</div>
+                <div>154,944</div>
+                <div>$2.59M</div>
+            </div>
+            <div class="data-row">
+                <div class="token-icon"></div>
+                <div>
+                    <div class="token-name">NOVA</div>
+                    <div class="token-details">0x9876...4321</div>
+                </div>
+                <div>$34.32M</div>
+                <div class="negative">-15.35%</div>
+                <div>$6.13M</div>
+                <div>172,271</div>
+                <div>$1.65M</div>
+            </div>
+        </div>
+    </main>
+
+    
+
+
+
+
+<!-- Add this right before </body> -->
+
+
+
+<div id="agentModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1001;">
+    <div style="position: relative; background: var(--navbar-bg); margin: 10% auto; padding: 20px; width: 80%; max-width: 500px; border-radius: 16px; border: 1px solid var(--border-color);">
+        <span style="position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; color: var(--text-secondary);" onclick="closeAgentModal()">&times;</span>
+        
+        <h2 style="margin-bottom: 20px; color: var(--text-color);">Create New Agent</h2>
+        
+        <form id="agentForm">
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px; color: var(--text-color);">Agent Name:</label>
+                <input type="text" id="agentName" required style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--search-bg); color: var(--text-color);">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px; color: var(--text-color);">Market Cap ($):</label>
+                <input type="number" id="marketCap" required style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--search-bg); color: var(--text-color);">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px; color: var(--text-color);">24h Change (%):</label>
+                <input type="number" id="change" step="0.01" required style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--search-bg); color: var(--text-color);">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px; color: var(--text-color);">TVL ($):</label>
+                <input type="number" id="tvl" required style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--search-bg); color: var(--text-color);">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px; color: var(--text-color);">Holders:</label>
+                <input type="number" id="holders" required style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--search-bg); color: var(--text-color);">
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px; color: var(--text-color);">24h Volume ($):</label>
+                <input type="number" id="volume" required style="width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--search-bg); color: var(--text-color);">
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button type="button" class="btn btn-secondary" onclick="previewAgent()">Preview</button>
+                <button type="button" class="btn btn-primary" onclick="createAgent()">Create Agent</button>
+            </div>
+        </form>
+
+        <!-- Preview Section -->
+        <div id="previewSection" style="display: none; margin-top: 20px; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);">
+            <h3 style="margin-bottom: 15px; color: var(--text-color);">Preview</h3>
+            <div id="previewRow" class="data-row">
+                <!-- Preview content will be inserted here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+        // Theme toggle functionality
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.querySelector('.theme-toggle');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                html.removeAttribute('data-theme');
+                themeToggle.innerHTML = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Initialize theme from localStorage
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            if (savedTheme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '🌙';
+            } else {
+                themeToggle.innerHTML = '☀️';
+            }
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', initializeTheme);
+
+        // Menu toggle functionality
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    
+
+
+
+// Add this after your existing script
+function openAgentModal() {
+    document.getElementById('agentModal').style.display = 'block';
+}
+
+function closeAgentModal() {
+    document.getElementById('agentModal').style.display = 'none';
+    document.getElementById('previewSection').style.display = 'none';
+    document.getElementById('agentForm').reset();
+}
+
+function generateRandomAddress() {
+    const chars = '0123456789abcdef';
+    let address = '0x';
+    for (let i = 0; i < 4; i++) {
+        address += chars[Math.floor(Math.random() * chars.length)];
+    }
+    address += '...';
+    for (let i = 0; i < 4; i++) {
+        address += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return address;
+}
+
+function formatCurrency(number) {
+    if (number >= 1000000) {
+        return '$' + (number / 1000000).toFixed(2) + 'M';
+    }
+    return '$' + number.toFixed(2);
+}
+
+function createAgentRow(data) {
+    return `
+        <div class="token-icon"></div>
+        <div>
+            <div class="token-name">${data.name}</div>
+            <div class="token-details">${generateRandomAddress()}</div>
+        </div>
+        <div>${formatCurrency(data.marketCap)}</div>
+        <div class="${data.change < 0 ? 'negative' : ''}">${data.change > 0 ? '+' : ''}${data.change.toFixed(2)}%</div>
+        <div>${formatCurrency(data.tvl)}</div>
+        <div>${data.holders.toLocaleString()}</div>
+        <div>${formatCurrency(data.volume)}</div>
+    `;
+}
+
+function getFormData() {
+    return {
+        name: document.getElementById('agentName').value,
+        marketCap: parseFloat(document.getElementById('marketCap').value),
+        change: parseFloat(document.getElementById('change').value),
+        tvl: parseFloat(document.getElementById('tvl').value),
+        holders: parseInt(document.getElementById('holders').value),
+        volume: parseFloat(document.getElementById('volume').value)
+    };
+}
+
+function previewAgent() {
+    if (!document.getElementById('agentForm').checkValidity()) {
+        alert('Please fill all required fields');
+        return;
+    }
+
+    const data = getFormData();
+    const previewRow = document.getElementById('previewRow');
+    previewRow.innerHTML = createAgentRow(data);
+    document.getElementById('previewSection').style.display = 'block';
+}
+
+function createAgent() {
+    if (!document.getElementById('agentForm').checkValidity()) {
+        alert('Please fill all required fields');
+        return;
+    }
+
+    const data = getFormData();
+    const dataTable = document.querySelector('.data-table');
+    const newRow = document.createElement('div');
+    newRow.className = 'data-row';
+    newRow.innerHTML = createAgentRow(data);
+    
+    dataTable.appendChild(newRow);
+    closeAgentModal();
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('agentModal');
+    if (event.target == modal) {
+        closeAgentModal();
+    }
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
